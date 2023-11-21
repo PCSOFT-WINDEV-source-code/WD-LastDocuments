@@ -1,0 +1,828 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cLastDocuments
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x186e5f0f011dc956
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  internal_properties : CAAAAAgAAACxiljviNYdDuiXmEtFrkfMaJi1zHZ8t0jBdBgFp9nQDg501WQmLn1B694TVpnwF8hVRtQEGsFKhWqP1a8pu7n53B3TjzMeWJk=
+  type_code : 10
+  p_codes :
+   -
+     code : |1-
+      // Manage the list of the last files used so it can be displayed it in a menu
+      // Corresponds for instance to the list of the last projects loaded in WinDev ("File" menu).
+      //
+      // Use:
+      //	1.  Declare an object for the management of the last documents
+      //	gclLastDocuments is object cLastDocuments()
+      //
+      //	2.  Initialization to indicate the name of the popup menu (if there is one)
+      //	gclLAstDocuments:SpecifyPopupMenu(MENU_Popup..Name)
+      //
+      //	3.  Initialization to display the last documents in the menu
+      //	To do so, specify:
+      //		- the name of the window
+      //		- the name of the menu where the last documents will be listed
+      //		- the procedure that will be called when clicking a document
+      //		- the name of the separator option that will be found at the end of the list (the documents will be added before this separator)
+      //		- the maximum number of options that can be managed
+      //	gclLastDocuments:InitMenu(WIN_TEST..Name, OPT_Menu..Name, "OpenFile", OPT_SEP_1..Name, 10)
+      
+      cLastDocuments is Class
+      PRIVATE	// Data handled by the class only
+      	m_sWinName is string // Name of window that owns the menu
+      	m_sMenuName is string // Name of the menu where the options will be added
+      	m_sNamePopupMenu is string // Using a popup menu
+      	m_sRegName is string // Entry in the registry
+      	m_CBProcedure is PROCEDURE // CallBack procedure that must be called during a click
+      	m_sSepName is string // Name of the separator option
+      	m_nMaxMenuNb is int // Maximum number of menu options
+      	m_nNbMenuUsed is int // Number of menu options used
+      	m_arrFileName is array of 0 strings // Names of the files		
+      	m_arrMenuName is array of 0 strings // Name of the menu options
+      	m_arrNamePopupMenu is array of 0 strings // Name of the options for the popup menu
+      	
+      END
+     type : 131072
+   -
+     code : |1-
+      
+     type : 131074
+  procedures :
+   -
+     name : Constructor
+     procedure_id : 1760449022396385622
+     type_code : 27
+     code : |1-
+      // Summary: Constructor
+      // Syntax:
+      // Constructor ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //
+      PROCEDURE Constructor()
+     type : 589824
+   -
+     name : Destructor
+     procedure_id : 1760449022396451158
+     type_code : 28
+     code : |1-
+      // Summary:  Destructor
+      // Syntax:
+      // Destructor ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //
+      PROCEDURE Destructor()
+     type : 655360
+   -
+     name : InitMenu
+     procedure_id : 1760449022396516694
+     type_code : 12
+     code : |1-
+      // Summary: The InitMenu method is used to initialize the menu with the previously opened documents. The menu was specified by the SpecifyPopupMenu method.
+      //
+      //Syntax:
+      //InitMenu (<sWindowName> is string, <CBProcedure> is procedure [, <sMenuName> is string [, <sSeparatorName> is string [, <nMaxNbOptions> is int]]])
+      //
+      //Parameters:
+      //	sWindowName (ANSI string): Name of the window
+      //	CBProcedure (procedure): Name of the procedure that will be called during a click on an option of last documents. This procedure expects the full name of the file in parameter
+      //	sMenuName (ANSI string - default value=""): Name of the menu in which the list of last documents must be displayed
+      //	sSeparatorName (ANSI string - default value=0): Name of the separator before which the documents will be listed
+      //	nMaxNbOptions (integer - default value=10): Maximum number of documents that can be managed
+      
+      PROCEDURE InitMenu(LOCAL sWindowName is string, LOCAL CBProcedure is PROCEDURE, LOCAL sMenuName is string = "", LOCAL sSeparatorName is string = 0, LOCAL nMaxNbOption is int = 10)
+      
+      nMenuSubscript is int = 0
+      nOptNum is int = 0	
+      sFileName is 	string = ""
+      nMenuNum is int = 0
+      nBound is int
+      sNameOption is string
+      
+      
+      // Initialize the member with the name of the window
+      :m_sWinName = sWindowName
+      // Initialize the member with the registry entry
+      :m_sRegName = ProjectInfo(piRegistry)
+      // Initialize the menu
+      :m_sMenuName = sMenuName
+      // Initialize the maximum number of options
+      :m_nMaxMenuNb = nMaxNbOption
+      // Initialize the procedure that will be called during a click
+      :m_CBProcedure = CBProcedure
+      
+      // Allocation of arrays: the number of elements cannot exceed the maximum number of options
+      :m_arrMenuName = new array of :m_nMaxMenuNb strings
+      :m_arrNamePopupMenu = new array of :m_nMaxMenuNb strings
+      :m_arrFileName = new array of :m_nMaxMenuNb strings
+      
+      // Create the entries in the registry
+      IF NOT RegistryCreateKey(:m_sRegName) THEN 
+      	// Check whether the key exists
+      	IF  NOT RegistryExist(:m_sRegName) THEN
+      		// The key does not exist and it was not created
+      		Error(StringBuild(<§$0016§>, :m_sRegName) + ErrorInfo())
+      		RETURN 			
+      	END
+      END
+      
+      // Retrieve the number of the separator option
+      :m_sSepName = sSeparatorName
+      
+      // Create the menu options dynamically
+      FOR nMenuSubscript = 1 _TO_ :m_nMaxMenuNb
+      	// Menu of the window
+      	IF :m_sMenuName <> "" THEN 
+      		sNameOption = StringBuild("OPT_LASTDOC_%1", nMenuSubscript)
+      		// Create the option, before the separator
+      		MenuInsertOption(:m_sMenuName, :m_sSepName, sNameOption, StringBuild(<§$0017§>, nMenuSubscript), :_ClickMenuOption, nMenuSubscript)	
+      		// Store the menu number
+      		:m_arrMenuName[nMenuSubscript] = sNameOption
+      	END
+      	
+      	// Popup menu
+      	IF :m_sNamePopupMenu <> "" THEN
+      		sNameOption = StringBuild("OPT_CT_LASTDOC_%1", nMenuSubscript)
+      		// Create the option, at the end of the menu
+      		MenuAddOption(:m_sNamePopupMenu, sNameOption, StringBuild(<§$0018§>, nMenuSubscript), :_ClickMenuOption, nMenuSubscript)		
+      		// Store the menu number
+      		:m_arrNamePopupMenu[nMenuSubscript] =  sNameOption
+      	END
+      END
+      
+      nBound = :m_nMaxMenuNb
+      // Retrieve the names of the files in the registry
+      FOR nOptNum = 1 TO nBound
+      	
+      	// Read the name of the file whose number is OptNum
+      	sFileName = RegistryQueryValue(:m_sRegName + "\LastFile" + nOptNum, "")
+      	IF sFileName = "" THEN
+      		// Entry not found
+      		BREAK
+      	END
+      	
+      	// Initialize the table with the name of the document
+      	:m_arrFileName[nOptNum] = sFileName
+      END
+      
+      // Initialize the member with the number of options used
+      :m_nNbMenuUsed = nOptNum - 1	
+      
+      // Refresh the menu
+      :_RefreshMenu()
+     type : 458752
+   -
+     name : _ModifReg
+     procedure_id : 1760449022396582230
+     type_code : 12
+     code : |1-
+      // Summary: Modifies the registry
+      
+      PROCEDURE PRIVATE _ModifReg(LOCAL bCheckPresence is boolean = True)
+      
+      nOptNum is int = 0
+      nKeyNum is int = 0
+      nBound is int
+      
+      
+      nBound = :m_nMaxMenuNb
+      // Delete all the keys
+      FOR nOptNum = 1 TO nBound
+      	// Check whether the key exists
+      	IF RegistryExist(:m_sRegName + "\LastFile" + nOptNum) THEN	
+      		// The key exists: delete it
+      		IF NOT RegistryDeleteKey(:m_sRegName + "\LastFile" + nOptNum) THEN
+      			// The entry has not been deleted
+      			Error(StringBuild(<§$0013§>, :m_sRegName, nOptNum))
+      		END
+      	END
+      END
+      
+      nBound = :m_nNbMenuUsed
+      // Create the necessary keys in the registry 
+      FOR nOptNum = 1 TO nBound
+      	// Check whether the file exists
+      	IF fDir(:m_arrFileName[nOptNum], frFile) <> "" OR bCheckPresence=False THEN 	
+      		// Increment the key number
+      		nKeyNum++
+      		
+      		// The file exists: create the key
+      		IF NOT RegistryCreateKey(:m_sRegName + "\LastFile" + nKeyNum) THEN
+      			// The key cannot be created
+      			Error(StringBuild(<§$0014§>, :m_sRegName, nKeyNum))
+      			RESULT False
+      		END
+      		
+      		
+      		IF NOT RegistrySetValue(:m_sRegName + "\LastFile" + nKeyNum, "", :m_arrFileName[nOptNum]) THEN
+      			// The value has not been written into the registry
+      			Error(StringBuild(<§$0015§>, :m_arrFileName[nOptNum]))
+      			RESULT False
+      		END
+      	END
+      END
+      
+      // Initialize the member :NbMenuUsed
+      :m_nNbMenuUsed = nKeyNum
+      RESULT True
+     type : 458752
+   -
+     name : PassInFront
+     procedure_id : 1760449022396647766
+     type_code : 12
+     code : |1-
+      // Summary: The PassInFront method is used to modify the order in which the documents are displayed in the menu. The document passed in parameter to PassInFront will be displayed first in the list of previously opened documents.
+      //
+      //Syntax:
+      //PassInFront (<sDocumentName> is string)
+      //
+      //Parameters:
+      //	sDocumentName (ANSI string): Name of the document to move in first position.
+      //Example:
+      //
+      ////Displays the "Invoices.doc" document in first position
+      //MyLastDocuments:PassInFront("Invoices.doc")
+      
+      PROCEDURE PassInFront(LOCAL sDocumentName is string)
+      
+      nMenuNum is int = 0
+      nFoundMenuNum is int = 0
+      nBound is int
+      
+      
+      // Check whether the document is already in first position
+      IF :m_arrFileName[1] ~= sDocumentName THEN
+      	// No action, already located properly
+      	RETURN
+      END
+      
+      
+      nBound = :m_nNbMenuUsed
+      // Find the position of the name (if it already existed)
+      FOR nMenuNum = 2 TO nBound
+      	IF :m_arrFileName[nMenuNum] ~= sDocumentName THEN
+      		// Retrieve the option number of the document
+      		nFoundMenuNum = nMenuNum
+      		BREAK
+      	END
+      END
+      
+      IF nFoundMenuNum = 0 THEN
+      	// The document does not exist: add it to the menu
+      	// Check whether some options are not used
+      	IF :m_nNbMenuUsed = :m_nMaxMenuNb THEN
+      		// Replace the last row
+      		nFoundMenuNum = :m_nMaxMenuNb
+      	ELSE
+      		// Add a menu option that is not saturated
+      		nFoundMenuNum = :m_nNbMenuUsed+1
+      	END
+      END
+      
+      // Move the names of the files downward
+      FOR nMenuNum = nFoundMenuNum TO 2 STEP -1
+      	// Replace the element n with element n-1
+      	:m_arrFileName[nMenuNum] = :m_arrFileName[nMenuNum-1]	
+      END
+      
+      // Place the document at the top
+      :m_arrFileName[1] = sDocumentName
+      
+      
+      // Increment the number of options
+      IF nFoundMenuNum > :m_nNbMenuUsed AND :m_nNbMenuUsed < :m_nMaxMenuNb THEN :m_nNbMenuUsed++
+      
+      // Modify the registry
+      :_ModifReg()
+      
+      // Refresh the menus
+      :_RefreshMenu()
+     type : 458752
+   -
+     name : _GiveFileName
+     procedure_id : 1760449022396713302
+     type_code : 12
+     code : |1-
+      // Sumary: The GiveFileName method returns the name of the document associated with the menu option passed in parameter.
+      //
+      //Syntax:
+      //[ <Result> = ] _ReturnFileName (<nOptionNum> is int)
+      //
+      //Parameters:
+      //	nOptionNum (integer): Number of the option
+      //Example:
+      //
+      
+      FUNCTION PRIVATE _GiveFileName(LOCAL nOptionNum is int)
+      
+      RESULT :m_arrFileName[nOptionNum]
+     type : 458752
+   -
+     name : _TruncateFileName
+     procedure_id : 1760449022396778838
+     type_code : 12
+     code : |1-
+      // Summary: Procedure used to truncate the path of the document if it is too long
+      // Description of input/output parameters of '_TruncateFileName':
+      //
+      // Syntax:
+      //[ <Result> = ] _TruncateFileName (<sDocumentName> is string [, <nTextLength> is int])
+      //
+      // Parameters:
+      //	sDocumentName (ANSI string): PAth + Name of document
+      //	nTextLength (integer - default value=25): Length used for truncation
+      // Return value:
+      // 	ANSI string: Truncated path
+      
+      PROCEDURE PRIVATE _TruncateFileName(LOCAL sDocumentName is string, LOCAL nTextLength is int = 25)	
+      
+      nStartPosNom is int = 0
+      nEndNameSize is int = 0
+      bLastSlashSeen is boolean = True
+      sTruncatedName  is string
+      sDirectory is string
+      nAvailableSize is int
+      
+      // Adds the disk with "\"
+      sTruncatedName = fExtractPath(sDocumentName, fDrive) + ["\"]
+      
+      // Retrieves the directories
+      sDirectory = fExtractPath(sDocumentName, fDirectory)
+      // Deletes the "\" at the beginning
+      sDirectory[[1]] = ""
+      
+      // Defines the available size for the directory
+      nAvailableSize = nTextLength - Length(fExtractPath(sDocumentName, fFileName+fExtension)) - Length(sTruncatedName)
+      
+      // Adds the directories according to the available limit
+      FOR i = 1 TO nAvailableSize
+      	sTruncatedName += sDirectory[[i]]
+      END
+      
+      // If the name is incomplete, add "..."
+      IF sTruncatedName <> fExtractPath(sDocumentName, fDrive+fDirectory) THEN
+      	sTruncatedName += "...\"
+      END
+      
+      // Adds the name of the file
+      sTruncatedName += fExtractPath(sDocumentName, fFileName+fExtension)
+      
+      
+      RESULT sTruncatedName
+     type : 458752
+   -
+     name : DeleteFile
+     internal_properties : CAAAAAgAAAACJNLoRv487mQbyEKmoPq//qC/1KVjFWKfcArxnaGUyEZdW2qsRwMBPc1r2pMqmHo31DplwZZ1tUgoB7gHzDxu/REfDaJrLH/b/rV95Tg4SrpiYWPQn5VxkGH+c/D7KJIRnaUJA9zZVf7Vcp6PTfW1H7DNel3e8FLsVXar6CFW4ug5KMJMj36cQuPrC7PQKPA3e7qTow==
+     procedure_id : 1760449022396844374
+     type_code : 12
+     code : |1-
+      // Summary: The DeleteFile method is used to clean the list of last opened documents by deleting from this list the documents whose file does no longer exist.
+      //
+      //Syntax:
+      //DeleteFile ()
+      //
+      //Parameters:
+      //	None
+      //Example:
+      //
+      ////Cleans the menu
+      //MyLastDocuments:DeleteFile()
+      
+      PROCEDURE DeleteFile()
+      
+      // Modify the registry
+      :_ModifReg()
+      
+      // Refreshes the menu
+      :_RefreshMenu()
+     type : 458752
+   -
+     name : _ModifPopupMenu
+     procedure_id : 1760449022396909910
+     type_code : 12
+     code : |1+
+      // Summary: Procedure used to modify the window menu
+      // Syntax:
+      //_ModifPopupMenu ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      
+      PROCEDURE PRIVATE _ModifPopupMenu()
+      
+      nOptNum is int = 0
+      sDocumentName is string = ""
+      nBound is int
+      
+      
+      nBound =  :m_nMaxMenuNb
+      // Make all the menu options invisible
+      FOR nOptNum = 1 TO nBound
+      	WHEN EXCEPTION IN
+      		{ :m_arrNamePopupMenu[nOptNum], indControl}..Visible = False
+      	DO
+      		// Nothing
+      	END
+      END
+      
+      nBound = :m_nNbMenuUsed
+      // Modify the captions
+      FOR nOptNum = 1 TO nBound
+      	
+      	// Enable the menu option
+      	{:m_arrNamePopupMenu[nOptNum], indControl}..Visible = True
+      	
+      	// Initialize the variable with the full name of the document
+      	sDocumentName = RegistryQueryValue(:m_sRegName + "\LastFile" + nOptNum, "")
+      	
+      	// Truncate the name if the path is too long
+      	sDocumentName = :_TruncateFileName(sDocumentName)	
+      	
+      	// The "\:" are replaced by ":"
+      	sDocumentName = Replace(sDocumentName, "\:", ":")
+      	
+      	// Modify the caption of the menu option
+      	{:m_arrNamePopupMenu[nOptNum], indControl}..Caption = sDocumentName
+      	
+      END
+     type : 458752
+   -
+     name : _ModifMenu
+     procedure_id : 1760449022396975446
+     type_code : 12
+     code : |1-
+      // Summary: Procedure used to modify the window menu
+      
+      PROCEDURE PRIVATE _ModifMenu()
+      
+      nOptNum is int = 0
+      sDocumentName is string = ""
+      nBound is int
+      
+      
+      IF :m_sMenuName <> "" THEN 
+      	
+      	nBound = :m_nMaxMenuNb
+      	// Make all the menu options invisible
+      	FOR nOptNum = 1 TO nBound
+      		
+      		WHEN EXCEPTION IN
+      			{ :m_arrMenuName[nOptNum], indControl}..Visible = False
+      		DO
+      			// Nothing
+      		END
+      		
+      	END
+      	
+      	// If no document is read
+      	IF :m_nNbMenuUsed = 0 THEN
+      		// Make the separator line invisible
+      		{:m_sSepName,indControl}..Visible = False
+      		// Do not continue
+      		RETURN
+      	ELSE
+      		// The separator line above the options is made visible
+      		{:m_sSepName,indControl}..Visible = True
+      	END
+      	
+      	nBound = :m_nNbMenuUsed
+      	// Modify the captions
+      	FOR nOptNum = 1 TO nBound
+      		
+      		// Enable the menu option
+      		{:m_arrMenuName[nOptNum],indControl}..Visible = True
+      		
+      		// Initialize the variable with the full name of the document
+      		sDocumentName = RegistryQueryValue(:m_sRegName + "\LastFile" + nOptNum, "")
+      		
+      		// Truncate the name if the path is too long
+      		sDocumentName = :_TruncateFileName(sDocumentName)	
+      		
+      		// Modify the caption of the menu option
+      		{:m_arrMenuName[nOptNum],indControl}..Caption = "&" + nOptNum + " " + sDocumentName
+      		
+      	END
+      END
+     type : 458752
+   -
+     name : SpecifyPopupMenu
+     procedure_id : 1760449022397040982
+     type_code : 12
+     code : |1-
+      // Summary: The SpecifyPopupMenu method is used to indicate the menu that will be used to display the list of last opened documents. This menu can be the main menu of a window or a popup menu.
+      //Syntax:
+      //SpecifyPopupMenu ([<sMenuName> is string])
+      //
+      //Parameters:
+      //	sMenuName (ANSI string): Name of the popup menu used to display the list of last opened documents. If this parameter is not specified, the "PopupMenu1" menu will be used (default name of the first popup menu created in a window).
+      //Example:
+      //
+      ////Modifies the menu where the list of opened documents will be displayed.
+      //MyLastDocuments:SpecifyPopupMenu("menuMyDocList)
+      
+      PROCEDURE SpecifyPopupMenu(LOCAL sMenuName is string = <§$0012§>)
+      
+      :m_sNamePopupMenu = sMenuName
+     type : 458752
+   -
+     name : DeleteMenuFile
+     procedure_id : 1760449022397106518
+     type_code : 12
+     code : |1-
+      // Summary: The DeleteMenuFile method is used to delete a document from the list of last opened documents.
+      //Syntax:
+      //DeleteMenuFile (<sDocumentName> is string)
+      //
+      //Parameters:
+      //	sDocumentName (ANSI string): Name of the document
+      //Example:
+      //
+      ////Deletes the opened document ("Accounting.doc")
+      //MyLastDocuments:DeleteMenuFile("Accounting.doc")
+      
+      PROCEDURE DeleteMenuFile(LOCAL sDocumentName is string)
+      
+      nBound is int
+      
+      
+      // Find the document in the list
+      nDocSubscript is int = :_nDocumentPos(sDocumentName)
+      
+      // Exit if not found (unable to delete something that does not exist)
+      IF nDocSubscript = 0 THEN RETURN
+      
+      // All the other documents must be passed in front!
+      nSubscript is int
+      nBound = (:m_nMaxMenuNb-1)
+      
+      FOR nSubscript=(nDocSubscript+1) TO nBound
+      	:m_arrFileName[nSubscript-1] = :m_arrFileName[nSubscript]	
+      END
+      
+      // Delete the last one (it was copied to the last but one)
+      :m_arrFileName[:m_nMaxMenuNb] = ""
+      
+      // Count one less document
+      :m_nNbMenuUsed--
+      
+      // Save in the registry
+      :_ModifReg(False)
+      
+      // Refresh the menu
+      :_RefreshMenu()
+     type : 458752
+   -
+     name : _nDocumentPos
+     procedure_id : 1760449022397172054
+     type_code : 12
+     code : |1-
+      // Summary: Returns the position of a document
+      // Syntax:
+      //[ <Result> = ] _nDocumentPos (<sDocumentName> is string)
+      //
+      // Parameters:
+      //	sDocumentName (ANSI string): Name of the document to find
+      // Return value:
+      // 	integer: position of the document, 0 if document not found
+      
+      PROCEDURE PRIVATE _nDocumentPos(LOCAL sDocumentName is string)
+      
+      // Find the position of a document in the table of documents
+      nSubscript is int
+      nBound is int
+      
+      
+      nBound = :m_nMaxMenuNb
+      FOR nSubscript = 1 TO nBound
+      	// Compare the name
+      	IF :m_arrFileName[nSubscript] ~= sDocumentName THEN RESULT nSubscript
+      END
+      
+      // By default, the document is not found
+      RESULT 0
+     type : 458752
+   -
+     name : _RefreshMenu
+     internal_properties : CAAAAAgAAAB/QxmAHc0G3ZiNhx7bE0wMolVFV3YVWfy9sGYv2rOXrI77y3+TaiWe+MIxT70/Gq2D8i60e9DXVU72lxl/lO3sgDiaw52uz0rXrGGx95m+kT43SOumyH/w7zrKcbTANH0fWgiHab9pvsO48ERjTHcGiw18xv23ig0HGo6/PpLYEUTcSdIQ+CKj0UBlVZN0XYOu7XEE
+     procedure_id : 1760449022397237590
+     type_code : 12
+     code : |1-
+      // Summary: Refreshes the menu
+      // Syntax:
+      //_RefreshMenu ([<sWindowName> is string])
+      //
+      // Parameters:
+      //	sWindowName (ANSI string): Name of the window
+      // Return value:
+      // 	None
+      //
+      PROCEDURE PRIVATE _RefreshMenu(LOCAL sWindowName is string = :m_sWinName)
+      
+      // Refresh the window menu
+      IF sWindowName <> "" THEN
+      	// Modify the menu
+      	:_ModifMenu()
+      END
+      
+      // Refresh the popup menu
+      IF :m_sNamePopupMenu <> "" THEN 
+      	// Modify the popup menu
+      	:_ModifPopupMenu()
+      END
+     type : 458752
+   -
+     name : _ClickMenuOption
+     procedure_id : 1760449022397303126
+     type_code : 12
+     code : |1-
+      // Summary: Procedure called during a click on a menu option
+      // Syntax:
+      //_ClickMenuOption (<nDocument> is int)
+      //
+      // Parameters:
+      //	nDocument (integer): Subscript of the document
+      // Return value:
+      // 	None
+      //
+      PROCEDURE PRIVATE _ClickMenuOption(LOCAL nDocument is int)
+      
+      // Path of the corresponding file
+      sFileName is string 
+      
+      
+      // Retrieves the path of the file
+      sFileName = :_GiveFileName(nDocument)
+      
+      // Runs the CallBack procedure
+      IF :m_CBProcedure <> Null THEN
+      	// Runs the CallBack procedure of the file
+      	:m_CBProcedure(sFileName)
+      END
+     type : 458752
+   -
+     name : ResetStoring
+     internal_properties : CAAAAAgAAAACJNLoRv48rmSbyEKmIPq//qA/1CXjlWIfcIpxHaEUSMbdW+qsRwOBPU1r2pOqmHo31LplQRb1tcgohziHzLzufZEfjaJrLP/bfnU9pXh4inoioaOQ31Wx0KG+M7A7aNLRXeVJwxyZlT4VMl5PjTX133ANuh0esJIslTZrqGGWIqj5aAIMzz7cgiOry3PQKPA3e7qTow==
+     procedure_id : 1760449022397368662
+     type_code : 12
+     code : |1-
+      // Summary: Stops storing the last files
+      // Syntax:
+      //ResetStoring ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      
+      PROCEDURE ResetStoring()
+      
+      
+      // Delete all the keys
+      FOR nOptNum = 1 _TO_ :m_nMaxMenuNb
+      	
+      	// Check whether the key exists
+      	IF RegistryExist(:m_sRegName + "\LastFile" + nOptNum) THEN	
+      		// The key exists: delete it
+      		IF NOT RegistryDeleteKey(:m_sRegName + "\LastFile" + nOptNum) THEN
+      			// The entry has not been deleted
+      			Error(StringBuild(<§$0013§>, :m_sRegName, nOptNum))
+      		END
+      	END
+      	
+      END
+      
+      // There is no menu used
+      :m_nNbMenuUsed = 0
+      
+      // Refreshes the options
+      :_RefreshMenu()
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : cDerniersDocuments
+resources :
+ string_res :
+  identifier : 0x3b8b706c26568b69
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+  strings :
+   -
+     text :
+      en-GB : The entry
+     index : 0
+   -
+     text :
+      en-GB : " cannot be deleted"
+     index : 1
+   -
+     text :
+      en-GB : The key
+     index : 2
+   -
+     text :
+      en-GB : " cannot be created"
+     index : 3
+   -
+     text :
+      en-GB : The value
+     index : 4
+   -
+     text :
+      en-GB : " has not been written into the registry"
+     index : 5
+   -
+     text :
+      en-GB : "The key "
+     index : 6
+   -
+     text :
+      en-GB : " cannot be created"
+     index : 7
+   -
+     text :
+      en-GB : FileName
+     index : 8
+   -
+     text :
+      en-GB : \LastFile
+     index : 9
+   -
+     text :
+      en-GB : \
+     index : 10
+   -
+     text :
+      en-GB : ":"
+     index : 11
+   -
+     text :
+      en-GB : "..."
+     index : 12
+   -
+     text :
+      en-GB : "."
+     index : 13
+   -
+     text :
+      en-GB : .Option
+     index : 14
+   -
+     text :
+      en-GB : "\\:"
+     index : 15
+   -
+     text :
+      en-GB : "&"
+     index : 16
+   -
+     text :
+      en-GB : " "
+     index : 17
+   -
+     text :
+      en-GB : PopupMenu1
+     index : 18
+   -
+     text :
+      en-GB : The %1\LastFile%2 entry has not been deleted.
+     index : 19
+   -
+     text :
+      en-GB : The %1\LastFile%2 key has not been created.
+     index : 20
+   -
+     text :
+      en-GB : The %1 value has not been written into the registry.
+     index : 21
+   -
+     text :
+      en-GB : The %1 key was not created
+     index : 22
+   -
+     text :
+      en-GB : "%1 document"
+     index : 23
+   -
+     text :
+      en-GB : "%1 document"
+     index : 24
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

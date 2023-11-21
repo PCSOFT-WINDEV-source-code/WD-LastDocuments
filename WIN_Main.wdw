@@ -1,0 +1,352 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : WIN_Main
+ major_version : 28
+ minor_version : 0
+ type : 2
+ description : Main window of the application
+ subtype : 0
+window :
+ name : WIN_Main
+ identifier : 0x286e5f0d046cc222
+ internal_properties : CAAAAAgAAACn6gnu2riilQWbtfkgWonJZ966//TEq1DeNy67LryPouQV3jXHrYZP78KTuD9PUYGuoHwitQuYoaVzGIYj1P2G6/sXsMa3ks6Lic+W11YThvoW0Qsl9yk7uiVogGVp6cMqpHlmhCRlmydlXHY85Y67jS69n4ysv0Ha9BdTx7tYPTHV972FyOZ/IFM/NPDXPl1VILxV8D7oovn4fbzMKd2aSnxdK0tm2NTF4b7y0B97fFlTtDIed00jyr9xw53NF+8ePMhtNYL7vhk6jV3rbM3gXeYXPCkZnKHsNi2PXhSEuePevgz0mSsMc0Ui4egaA2sjgR9sl7US8tMvl3ILEAQqm8vVfh3Lk68B3vLx3uAs89OUu4EAdReHcYXmrjX9C0xg5fAgnceCjpKPEiTH6+M3lRqHYebBILy+kD+/dLC1BDQ/FsswFNzUAtsKTWryPGftMbaa3prWYG9L6Ouu95IH1cUsPqdyhHP8Mfm01OPfTryIax0RSseCPONkHoCLnAdc/tDZGe0WouT0/9RpqZJkILywCLpblxYJrjzkdjp2U532YmjMi4cxeF2kZOyWfaeuDuClC0FK4NMfMYtqb+DZgUMSfU8K0FoxsHaVN89ntIDWApx70oaqI5d4Z/Xx/n9frI9cLleMxwLHlGbO+sNg6ds57wsKNDTb8ryB3iRFRa39xtzkr5+8pq43pZfm3VhEGF9oYQ1NNz2XcoW5RdhYOmiqwtvGFn177Vk6fnO8K4GltqRu4PKdEMNsZlRXXAsekJAaJZyu/78KiCsUDk10TiGwtzW/P50FBMbCGVC9v8u1vPxOAcL9fZ2kKaB+HAONM4tQJh5AZXTHIvUSNlSpTzJGGFh3ob/DLzzA9/Hb8E6Dikb+
+ properties :
+  width : 630
+  height : 445
+  widthClient : 628
+  heightClient : 391
+ controls :
+  -
+    name : Static1
+    identifier : 0x286e5f0d047dc232
+    internal_properties : CAAAAAgAAAAli9qr6S02WBrWLB4YZJO/icvc2H6hKQHSNLH2fDqOSpRIAy09CRadDKsZ2/rqahzkcfosGMloWOIqqbPPCe+edBpAzHKuJmCNUmEQd6vM6KhmIhgMU/cMc7DMw6GaEfG248JmK8vZuOA5HxRJvYZHB5ludIoNhgm2PEesPfbh0titJLFISLp2VN5nLNXngTef0zKgfSvFbBwFvJ/BViZBhddgPy4OqIc2sqosuqWBlycpC8dI0Me3r+aPNoRPRFE0n+//l1/oCv0sdkhYNlAMNIaCoDOMJ1FbkfH3B9At5w9HlTn9XMrkLb8tmXVakjhqVHiusScpgtuH0J+8AR7kMBM2HeEpz4uvnPyVsuqd7PuXt+o2GHF0n7LnoNJcdW7i9s7dTS4eFdu+ZqVuDVKfrvF87kV1Rwd39AvgkClorFMYnaCnhejk6j7pxfPCuK5gaifCRQK87wPtJ+SM4bYsd4uCWzERzo1fuAfqLKdNKi4zmpqywoon9fukcZAoX+TiRtHxgb31BfUtPNPOqtQmk/VkC3NRUKG2gSBDPA1xQftgWvX0091hCZ+p0oHDwHSiegNKfnz5IL6om511xizPYmbJx6kTf9CkmsPi4Uf/xL+xSk0yzpRvF8/6gGL1GJoxBDgEIGSqDeJWocMSQjpsY7W85LNNB8Pjzf4ePk7L7K6BmzregMncBoIjMYpjPKLbacqVtlLQedyuOlp9RIoFeo4NChcpoOULRO39QBzGMk729SH803lWBkISzyUbX/gZ
+    properties :
+     x : 97
+     y : 6
+     width : 525
+     height : 82
+    type : 3
+    code_elements :
+     type_code : 2
+     p_codes : []
+  -
+    name : BTN_Menu_Only
+    identifier : 0x286e5f0d047ec232
+    internal_properties : CAAAAAgAAABdgGmqFpLC4GWu1IkkAyhcd8O9s2HLT9ZbyBbk/0/rzixMVcddxqazg6UkYWoMw+YKvk7SG0jhhDmTsgY8YcGAofKV7pAWGLhz4ggVi6Q8++tlRRaSZeScpjbSsYBCK5hZDrAG1jv48jmBDKK/u9kdlmvBaMj+kzZwwVMAKtuVpgBiMkgcdfZShh3/TxEcvDiMVMThz2VNDL5jHBR1bXKNlr3Ce+ACs/W2JEsphen1jbDnersJ0iA6WE+L90IfZFarvnfzO5L4bPsBZmWAz0Eoeq07q64bCsvYmMbRqZaFDGIXYo1pAcBm9vN9RLGmK8cVdkQxeEIOSnT0R+2k3D0nZKmJZU/cbrpDcAjdDBVwosTalY0lRpV/oe6p7Sa99iUwO+eNW1mY9y/t6afryGQO9MI+0F2rJXEH7TYpp64EpgA4nP75el/D7FMWIPdYAPLeNJrOUFDmKfnB0StIoCElEMHRcpH4ZTIwq8fdmilXtkLGiRCj5+C8o3ui+7CQbeWLUEdY3rArW3iaYELnDEUEELxyirrXFwf5pGWY84q68WcNf33ccBGAmPq0P0pKyMFDwMi/EjvcqJYmS7Ag2JBiI7BwFSDfpBI5YI3y6R6vIp5TGaX5Cbq/9yoBTmj3/ogsoOaYksANtQ3vylVBBGjVGYXhXMQMNnfMzBl5hh7pR14Zu+rbbFMVzpF71lcUvXaKktWbU/qYAjg8Pcte14UubJd/uGAyNX21PAH+LncfWzG0HSUEvo84Jel8ghiFzvy8lJdxzJgA52j2VC7ICPo8nB+lHU5I+ljzhVUR8ER7mj9k8iwl1RoQhYyljhynmOhMHYhf5P43LHPPf8AL0yoo7oALuDfu6YUlw2QyIN6KNjqFYfwaIDu4dC+ydPzkDAYDN+Zt3GpSwT1mqmHuLpmzeKdNwygSCekgLSt0NjJc/UM5TIEZ/4gpmOF/GA==
+    properties :
+     x : 334
+     y : 88
+     width : 288
+     height : 24
+    type : 4
+    code_elements :
+     type_code : 4
+     p_codes :
+      -
+        code : |1-
+         
+        type : 14
+      -
+        internal_properties : CAAAAAgAAADimQKKv2r7Pyzw1UiDa7CyrVuSE47H54/iOWzr55RMvl2VUzcGoZ5GdWwBQTQpQ4TlDsh1W9BJ1IHywcn28ud224swh+4UwSNGn7xsZQJLHrr/SEWCC8IIt1S5ZUQBPEGnhLItK4zcNkxtuAMmxFA1WXHopN/NNoW40dXKCY4ZfeXPXw==
+        code : |1-
+         
+        type : 18
+      -
+        type : 161
+        enabled : false
+  -
+    name : Image1
+    identifier : 0x286e5f0d047fc232
+    internal_properties : CAAAAAgAAACbVqH/4THez6fbkpklaavCl6cL2BudeBW8s7aRUFsRXFo7JQC+wbqMROx5A0UOYgRFXjW0uCoeU6PCT+eWYuPFLp+apxN7YZ86c3TiXsV7f9JdDNKnmTft13d4lwIy9kYT4tQOSrdwfnva1kgCo5j5HkXGjnZ4vSSuDuMuWMushb9lG0nyUzp7tdNR89HFU4F1GqiXpSPiQyve4OA4/GNqg/7itkiP57f+57wDm63PVMFQF5U2nNuKvzu5WgnZsBM/GboJVkWUe2s3+qZjy+Mdy4DH3ruzgSjKUJeSEUjrM61ZpxpU7NgFnBlNwQOClHcelo/vYFkRdnGXLgJbd3gKgUpHNcybfe8tEQFNuDqiusBTR+ye0gyB29NiD/a4iSN6EaZy6aBF9lvwNa+swzXKeAwRtRoQ4v6rOpUkrVApyF1OIG6cKyHYgfUHP0gedIUp8e2H5ja5mPoEtt4G8YaIRn7YKHlAbDOLjvBaLLrZiEnKdZ1kVDVOxYWGwYkbSoNzZQnegbAuZOWJKe33q4CmSYqzVPYS4OvWBYBYORI67sTV6KLwLhloN4k5CSo2oI/cqXvS9mRSFFhUOaSZhreSU08PcMoFwpQNsbsBGR7+ElPT1xrUvNRgDRDRU1OnWZ5v/nC+KXhDCoUUnNgF+zh9z8zRFSfAsJqeHXL2k2F/sLM+3FNqRnDepsCMREbzILtdYtbzKDJ0CzGp9Z5Dsm6XSBTfsHD6NBjNu41s2rvcg7O0/M8++zjorI5l7zgWXPlEuaWo0bshlfCT57b70PAIjNANVPGlEz0nk8g6NwitiOCM/KoNOPMvgLKVac/2+DIrlwdMtBy6ONvZhSfT2XedJmaUiJwo7ScoDd1IP7pGdUHtUchjeNzmmG6syOzrDdma2gt3MQ0gGlObMx1B8TzqJyyBbS9XpCg50Q==
+    properties :
+     x : 24
+     y : 23
+     width : 67
+     height : 65
+    type : 8
+    code_elements :
+     type_code : 8
+     p_codes : []
+ menu :
+  name : _Menu
+  identifier : 0x286e5f0d0480c232
+  internal_properties : CAAAAAgAAAD7mLdZQF+q7mHdqMKqPikgbZvIRhKHk+XchJDgQDTy7FOYGGV23/0wh7s7b/TCoibreIU8/x5Z7fla0MaeFj6J7UBC50UKdiwA3TiAKmVzVwGzpad6KMQRb0C75C6h1ZNEAQyOigek0gfWxdBFzSM6p9hLR4cY8AbFTyjQuvbjjqNDn4YE8L5kPh8aXCN0rJUnLDvKZs+3ywIduxg+LjFejwWek5UGAvfWAECdPZW+e2kmJTpP+YufHGdsBTvr0EiaO2zw1nTrcNotVRNcgu6VEv+gAvYU1+/QP8miX9u9EOdhZohGVNpr
+  options :
+   -
+     name : OPT_File
+     identifier : 0x286e5f0d0481c232
+     internal_properties : CAAAAAgAAAAdH92MemC2iOh/QyzykMSlqm2yvgXc5IXqhOQoax/KoYduqGTzD8womJVCantygUjK/7NCLJgzsCs57nSus24KWqE5OCiq2WVvJt1aD5+HBwCQHCfX/kIMlDLegdiHXfDywtWhLJvAfq0EksXANyuBaQKcY0IUg4kYa5EMycTNBpBO1bpySwIQLsra4jmk3cCmCVH/Lwz6O7bajEOQYQkbv24s70r8AlJqmOVbzVcHpGJaOYJJxSM36n9GFfIHsZQzn/MEtepuPgjjuPz9s3jjIXnx4BESVmaHya6cFLRSW+UOqwNT4cB9zj6m/NstL0XnPjIkj0HA1uM/HKLG
+     options :
+      -
+        name : OPT_OpenDocument
+        identifier : 0x286e5f0d0482c232
+        internal_properties : CAAAAAgAAAB+4Ri1ZDBBKyBHdN+XqwPGpdiHyNvbkkNHvYSvkCQ4mj/a0EEEUJ5LB7A5JkD8nAttgK9lP/y0q1v2lvAqEeLY14Mykfl8LCk42ZTxkXIu/RDgC2Lr0vKRrFkJsuOcBnKghs6SIgyefxfnju3N7r6Ai23z7UmDXRe3nZgyTYQsBvXAZerMV7LZs985vbc45/hbvFVGSrNWXjnI9ZqRolPh9NQ7qeRY9mYs5X6MtX/NPDbxulNO1BvZtJenQODgKpw9gvM/KdzIN5pk+syRkkENtr93fVJRD0y8h9hjcdArPrEt87e4DILNfKrYlvAOdZJR0q1t2Q==
+        code_elements :
+         type_code : 26
+         p_codes :
+          -
+            internal_properties : CAAAAAgAAADVn7D7T8GUwpXWc9yQ+46fVQdWoL7rD1c1VE9yvCGJCZei0CT1Lp2dtnUTWuBOM6TFSLgYJh7vI+cOTa6HWTXNxHjxHHgxIWPJq19V5aOfczJoMXAxNGt6+WkKxc46irkYYFQiTbYgINb4KXI=
+            code : |1-
+             
+             sNameTXTFile		is string
+             
+             // Select a text file to view
+             sNameTXTFile = fSelect("", "", <§$0000§>, <§$0001§>+TAB+"*.*"+CR+<§$0003§>+TAB+"*.TXT", "TXT", fselOpen+fselExist)
+             
+             // Was a file selected?
+             IF sNameTXTFile <> "" THEN 
+             	
+             	IF fExtractPath(sNameTXTFile, fExtension) ~= ".txt" THEN
+             		OpenFile(sNameTXTFile)
+             	ELSE
+             		// Inform the user that no text file was opened
+             		Info("The selected file is not a text file.")
+             	END
+             	
+             END
+            type : 32
+      -
+        name : OPT_Separator1
+        identifier : 0x286e5f0d0483c232
+        internal_properties : CAAAAAgAAAB19foHOjGD3ERj0BbKOv9Q7AuZFt5QL1U31LxeOSQFi1fEqmo76y1KLKKt5P7oLHgGSvAhuZ3vW3zKBcQBMjotPN3rClFyL4MC4tuAP70usENXuIEhGngDCFzi4UxGX+fbELbi6kJ/YjVnbXpjVOkG8kckCF3QdiBH12kwy5q6dPLmqfQPmE+c/79krTBbdOZJR6am8mvuRXQRnBFgQoUsnD7jFwXWA72a7+8jyb6jl0gS/QBOFLkecm/FnsTIt8sKHB4XWYPeBf8pNIECtpvbEC6cSJiKqdJQ8DD3P3phecWJL6B/6EMM8qwl7KlUrMDUPkiggNClRbq6+XwZ+y87v8/PvSFo/t7lZqEq
+        code_elements :
+         type_code : 26
+         p_codes : []
+      -
+        name : OPT_Close
+        identifier : 0x286e5f0d0484c232
+        internal_properties : CAAAAAgAAABxSFoW/mnBf8w9Dx/MXwdLO25Mg9NrQQVesEYd78/NBB9MJ0zurnBWDUqRnWxEJlWAcDYaP/rGkaDcJuJyFhkF0oQyqVXl3jtPxKc2XNkSdRNxZ0HKTZOMp5RhbZY/qyVsO/bb9wvkpJQgMxhclhXPA02+dhGeW/GdRGUSKVD4VrG7XJ07sYNuqwjjH60RMdYN3kzD6GPqwCqoerSP114fThkc2ryJhNjovU63H6IuwUcBOF/TVADszPuRPrRZwPnx8qQcB9yi4BONrY0LWNomjy+xcXgsAQgrc3dFy5L4HnQ02uBwRQyJjdzrIM5V9gLNALknvtugfwBIj8NKmb5/kDpXe0EOqr3GIIAV5vP+fQ==
+        code_elements :
+         type_code : 26
+         p_codes :
+          -
+            code : |1+
+             
+             // Close the current window
+             Close(MDIActive())
+            type : 32
+      -
+        name : OPT_Separator2
+        identifier : 0x286e5f0d0485c232
+        internal_properties : CAAAAAgAAACyVtxQ/m3l8TJvfn3B4ZKSsif0K9By0w6qT+koiGVoAcGmYYnpVaGi85OllZhG/gpjcwJuj0Hej/STPVgQlkICwdCEYMmlvGviQMV4i0Mw38EF7jhNllqgLNa2RQb+jRLmVtaAKOCWn8cEpH7b4Jpl2Na4eSpHIqz4dC5xREz7p836Z6WQDzRlncBeSduhemECkOZOvbhP70lJhFpK1mAyGXP40MUlKxw2VihMKN6VAJs+plmbFwXvbupN4POtFLSZr8jhhiu4MmgvgFiN2ZBXRzkEfORosZjMB7x+aQ6G3P5aPawER7dOnQT+98S1ww==
+        code_elements :
+         type_code : 26
+         p_codes : []
+      -
+        name : OPT_DOCSEPARATOR
+        identifier : 0x286e5f0d0486c232
+        internal_properties : CAAAAAgAAADKXtRY9mXtiSp3dmWZSXoqOr98o1haqxZSp1FAEP3gaXmOufEBLQmay+PV5bhWLipj86Ke75FOj4RzPXig1gLSkQAUINklXDuiELWIa5Og3yGlDsitBmpAHNaWBfYe7eLW5kZg+OB2jycUFE770KplOPb4CYqXcvRwbCZ5nLSjD0Vi3+0ol5zNNTg2sfOpokl6GH52taA312EBHEICPogacTtwmN3Ns6ROjsB0QGZ9CBNG/gHT3+2XBmIFKAu1nPzxdwBp3hOgGgC3GMA1Aegvv7GM5IyAybDUH0T24YYOZGbClcT8T79WlQz2/8y9Ow==
+        code_elements :
+         type_code : 26
+         p_codes : []
+      -
+        name : OPT_Exit
+        identifier : 0x286e5f0d0487c232
+        internal_properties : CAAAAAgAAACjfFA7foFqJQL6jGaoYoTUS4kZFqi16c6etS6Q+UqWecnBLqed51F6q7/+vEoEPfXuZLZQCT+vYkAkxJnBRp4yX2svxStrSteWOUn8G/BhNlfvUTiLmRXWvbCEtMewiVkirLNbuPGnApq87j+9vB+MSKvhYlILx8WPSTO4s4MXQVwvhKRhqTmwnadT52K5rjuP3tUD6NI61gHCFM/lIpiqIhaBhQ6tuIQ7Q3Hbsb12+9hn++UOdrZiPKSVggc+1obtcbZpiKc/RMCXJKbVVeAOw+at1KeZf6z0UYRwXWdILlmcMz0JyNvei3k5srwqTMiD/5take43
+        code_elements :
+         type_code : 26
+         p_codes :
+          -
+            code : |1+
+             Close()
+            type : 32
+     code_elements :
+      type_code : 26
+      p_codes : []
+   -
+     name : OPT_Display
+     identifier : 0x286e5f0d0488c232
+     internal_properties : CAAAAAgAAAB/+0xNWTlh0VC66SVg3itCapFblJ2P1/23RMrdwSNwlBwJ37IbOVypRRXVyyiTThHz5hxa1FLKOFGqJ11mCxWg9+P8RLp9kbfwAbiUdP2I9l/1lXM47fowzXIMOA0XbNsfqKPp+/DJ+aqLqFWDplUWlWGiOSyWSe4fuEZCM5LLL0UILo+sRn5JSNb2LnQ7j4sgtSpPR13oLBedjVjbryXDxgi7yH1Ky4REO+NLxOvENp5oyTh/LJC9K3n5YXs2N8pDqsUgSNmuufWr8kHlTV879woZFNqa1mOUDmjjGdvF4XpXIjpo+AgU3k1a0QXK6is0UIMAt09fUTMmynIszPSuxIAdfhGAfwNfGl6kdK/aD5vJpUDM9hfKdY6pNg==
+     options :
+      -
+        name : OPT_Cascading
+        identifier : 0x286e5f0d0489c232
+        internal_properties : CAAAAAgAAAD9cvk7rqYPQhcUT9UbelcLlC80icHhtlOTrhjKW3fE7wjYmvgeEcQzDGlLJS52kVLY+Kocs6XI1xFNxqPlNlVPo3MQ+xaeG+EdsI+lD9adkOoJJHbl9HvebpYk/j33qug3h3JimWuIWtySqiKbsC7YXbQMVQuFPkKp3iq7Z6qOFm67byw5UWgVjoEy6zECy+9VKgkdRsG538ZDF5Sc3aZWKQNTrd1HE1mRjMpkV5fj36kcUkc5PNBwZ98x99rEDHZfNHP6SzxclpJ7cIlMHieKHgp77AUp3HGmePXlblLIisCXsVrV4Ky8G+9S4/rKZH7rGsh8fqyT3CPEbA==
+        code_elements :
+         type_code : 26
+         p_codes :
+          -
+            code : |1+
+             MDIWindowMenu(mdiCascade)
+            type : 32
+      -
+        name : OPT_Tile
+        identifier : 0x286e5f0d048ac232
+        internal_properties : CAAAAAgAAAAQOnPWl/SN0ylyC4jJcMjrCJN/wFKFYw3DfgdgOyoEE4fTH7DDuag3UsYxxwOxG2FjZDx7DFyinqNonn7Je5lyvQEK4o4tuDa/H1IkcqSH0hkwi3LWFxBpzT5DvribaZbwgpdCQjPT+MkzGSNHWTBkieL6WlcIiOzcDyeczSIObJcTY/iB/n/nV79CjvnOr48BuLJ2k6aGiw4bq2X1vuOHRep31bOnb/jEsn2H7dnb/NPptOygqoVo6IX3lNpDZHCjnREcecCP38bhU136QhQyfZfHnMs6ELtKISL3ju52088Tli7oOKrkmlC8spTiKf0yP/M=
+        code_elements :
+         type_code : 26
+         p_codes :
+          -
+            code : |1+
+             MDIWindowMenu(mdiTile)
+            type : 32
+      -
+        name : OPT_Separator4
+        identifier : 0x286e5f0d048bc232
+        internal_properties : CAAAAAgAAAAi5qyAzj21gSJ/bm0x8YKiojeEm2BCox5aXxkYeHVY0fH2MXn5pbGyY3MFFZgG3orj80Kuj4E+7zTzXZgQFmLCgRCEIMllnIti4GX4i4OQX4HFbviN1npALLYWhUZ+rRKmlpbAqGD2fwdkBL6bIPolWFZ4+arHwnyIJL7hlNyL153Kt/Ugn6R17fAuOWsxCpFSYHZejQi/fxl5lMqaZvDiKQNIoNW1m6xGBni8+O6lMKvOdimrZ3V/PlodUAP95KTpfxixlrtIQng/kEi9iWCnNyl0jNR4wajcF0zumf6W7O5KLbz0V8de7dTOJzQlUw==
+        code_elements :
+         type_code : 26
+         p_codes : []
+      -
+        name : OPT_CloseAll
+        identifier : 0x286e5f0d048cc232
+        internal_properties : CAAAAAgAAADbWEbbgn+sZJlMFrQFTNx9en6l9F0sQ0OC0CkxrghII1RHI9fqW/3lMAG/zZZ7cYosK83d8jpNTvpR9A+PYHtQTm4FBFZkSg/Rjj1L2NiXCeVErAj56FcWvx4Njpc6P8xlDFqg5euZuBlfOp8YptXO5shNBAIM/iP6/Bj9qIHJvcGhAKd2bkABztcngbYfawifTtYHoeA0xBSXdaMES+8P0xtOAEvxLT+hxftY3funUkDZu0z03awS7aWF2je2B0myP5IzudgrzOKVcbYUESymWeUvk0rPtI+g+wWzoIdMdeNFffGQeTGs8Qg3hFvCwdYGg/MWjRZawdFkGFGIrjJyU6iPNi6y/1guhKs0sA==
+        code_elements :
+         type_code : 26
+         p_codes :
+          -
+            code : |1+
+             MDIWindowMenu(mdiCloseAll)
+            type : 32
+     code_elements :
+      type_code : 26
+      p_codes : []
+  code_elements :
+   type_code : 26
+   p_codes : []
+ popup_menus :
+  -
+    name : PopupMenuMainWindow
+    identifier : 0x286e5f0d048dc232
+    internal_properties : CAAAAAgAAAC9hF6Iytu8663RYtcy+I9icacBLMnWdDvw/xshFPqzBradnr+hG4MINf0vz5vFL5g7GMFH/TShsoG2G0Ej6Zpdr7vo9UXn89j2k24tZGO1y+Y2WgSPGCllYqEKVwwBR811D8pOEzBoFFiLxa8IUpACmBWyrko7083Xmx7S0EjcCuQ2md0YB0AlPQy7nj1Xull0t6NzLqTEGfs8475vzQ/1K5Xbb8iCFSLfCRQl1pgbOuwK4tzopMYapYDGyvkFo/esSGnQlcJoDvTqny6S+CXQntOnFTjhHeTAMUlHnMf7LNU+xU2xMGEhoD0Tnh6HcGFKyC9WX6u5jx6xJ2p5C0spEGSm/PgK60WUq1J3Eha5UnhmsU8ye4eqqvnRwHmFGLhZeDSz/rCG4qdCmpHGEKo=
+    options :
+     -
+       name : OPT_Open
+       identifier : 0x286e5f0d048ec232
+       internal_properties : CAAAAAgAAAC2HwPlhgTwxdc8ogG/5pOklJvoa18UBP7ldYBggsmbYHwXzM0BTuQI6N+PaypwnrrlOFkdg3NyhfHChOvxONJJhYwmqUSw+Vysk3czpG35PLmUkIyLcMiGPrrjF/Zxr1IDgwi8B2uZ1K5oO7KF77YPWI4CCrZuA+YnvfVBtk0uxkOlf+DGg08hBXVQZN9ciKV6FlbP4N4V2H2sGGFVqcLw+Ur/T3eUJc/n3BdLiwyF1QeykhCpXnD9PVP6jZZMOZc3f99hbS59LrIMoYsQrpLXL8eXUwI19VUr5M+80tWTfhgETTjqlMVApXZ0hgJscjTT1GiHbtBMXZMhSVzrVX0QFLAxj/PQPHYXkHBnvHfYFxgcxitWZLeYRdA/y9IGafinPpk+8CdwZXUXQ3W5f5NCe7ThEElS
+       code_elements :
+        type_code : 26
+        p_codes :
+         -
+           code : |1-
+            // Call the option for opening the main menu
+            ExecuteProcess(WIN_Main.OPT_File.OPT_OpenDocument, trtMenuOption)
+           type : 32
+     -
+       name : OPT_Separator5
+       identifier : 0x286e5f0d048fc232
+       internal_properties : CAAAAAgAAAAlECjQnzV6KGjjfDOg2kEy0uedFdVcN+zlMLw7MtVEeFrxL67hve8uYfT/87Zfdoz6pRINXrcescgfBefb7JVmO4XGILMzBNQOv7Vsiq37vT1vQw+Xpmp4HU4+Ond02vI5hpO9GKMSzaFaxRVfIn2YG8cCtUu6QuXsJbnxGPzTpFn4jvXLan0JpElPT5yJp6jwKx5mrwtM1AwglMSav1M+28QBqnFpQSdueBXWE1x0LIprx97NGCHqA+jPf09ATbofyWUy9Q0JsSQD9Ll/2zrS5Lu6+d+DwlhVSWnzzEI0BzIoTPvLcSFaoyXvN5QsQro4q9+JZLfustXTIORrl4beBgJ2GxbHUe9bDakQNKKE2LuF0dmUjFwI26GZbBLBnNrXEG+zH2DyIE84+YYD5YLu7AIe
+       code_elements :
+        type_code : 26
+        p_codes : []
+    controls : []
+    code_elements :
+     type_code : 26
+     p_codes : []
+ languages :
+  - en-GB
+ message_bar :
+  internal_properties : CAAAAAgAAADL87ti9Za2B3O6xpRSc7dCVGZMOEXqSryc+nipfKsxco97K1wuC6OkSm1UyRIMVUH2I9JoVOZM5+ytzYfMo/RCPTm+TbEy5CbjXimkF7CDy3/PmqhdGleu6pdJH1d+
+ actionbar : {}
+ code_elements :
+  internal_properties : CAAAAAgAAADqbd0dFs5OJmNtfZD3VYVg1RT9jW9zvTguYb31E+Kcf4CHgOOYCGBHKv+MhCphIkktFrPWR7dgwivryY+HY8/NqBb1jg==
+  type_code : 1
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAAB5u2ymgzS41pHqBwikr95fOYt+TLY39xPx2NP+yAUJQXvuoEC9Wh3hMol/tpQqcxyJfEj05qptkekYQ7SJVyN/Ft7vEoIvLyEzLR0rFxHFDbyG/8b7YqEQw+Owy8ggoEsaBtqg3yiDXRKkRR4=
+     code : |1-
+      
+      
+      // Declare an object for managing the last documents
+      gclLastDocuments is object cLastDocuments()
+      
+      // Initialization to specify the name of the popup menu
+      // The last documents will be placed in the options of the popup menu whose names are Option1, Option2... Option10
+      gclLastDocuments:SpecifyPopupMenu(PopupMenuMainWindow..Name)
+      
+      // Initialization to display the last documents in the "File" menu
+      gclLastDocuments:InitMenu(WIN_Main..Name, WIN_Main.OpenFile, OPT_File..Name, OPT_DOCSEPARATOR..Name, 10)
+      
+      // By default, the menu options linked to the windows are not visible
+      GroupOpenedChild..Visible = False
+   -
+     code : |1-
+      
+     type : 34
+   -
+     type : 180
+     enabled : false
+   -
+     type : 230
+     enabled : false
+   -
+     code : |1-
+      
+     type : 2
+   -
+     code : |1-
+      
+     type : 11
+   -
+     code : |1-
+      
+     type : 12
+   -
+     code : |1-
+      
+     type : 17
+   -
+     code : |1-
+      
+     type : 13
+  procedures :
+   -
+     name : OpenFile
+     internal_properties : CAAAAAgAAADuwAa004qS732MJKb5TOcbBiwpqqhLD2szoL4NwR1oZHpd8zYIh7eBGY3P9vdeDEZDHAL5Xf7BxTTAM4Qz0EjScQEHIQ6j2Ee/fsdr90r2+PioF8miwbMTDg/QIVK9rjiXG1M3zfb/dxTrbOThf3OjHT4DoH/4lvxSW3CxkkR9ycS79Kq801Vvvl8P6mc5/S3bp25vxw==
+     procedure_id : 1760449013805204002
+     type_code : 14
+     code : |1-
+      PROCEDURE OpenFile(LOCAL sNameTXTFile is string)
+      
+      // Only take the .txt files into account
+      IF fExtractPath(sNameTXTFile, fExtension) ~= ".TXT" THEN 
+      	
+      	// Open a text file received in parameter in a viewing MDI child window
+      	MDIOpen(WIN_Document, "", sNameTXTFile, sNameTXTFile)
+      	
+      	// Pass the file in the last opened documents
+      	gclLastDocuments:PassInFront(sNameTXTFile)
+      	
+      END
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : FenPrincipale
+resources :
+ string_res :
+  identifier : 0x3fb2ba3409824ec8
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+  strings :
+   -
+     text :
+      en-GB : Select a text file
+     index : 0
+   -
+     text :
+      en-GB : All files (*.*)
+     index : 1
+   -
+     text :
+      en-GB : "*.*"
+     index : 2
+   -
+     text :
+      en-GB : Text file
+     index : 3
+   -
+     text :
+      en-GB : "*.TXT"
+     index : 4
+   -
+     text :
+      en-GB : TXT
+     index : 5
+custom_note :
+ internal_properties : CAAAAAgAAAC68/W0/adbG0nFCRhrE42B5HRnbDzVHaz86sSQyxlBk7I=
+associated_test :
+ name : TEST_Main.wxt
+rad :
+ internal_properties : CAAAAAgAAABoAN7PLpwJW3EiA7WVZdCA5EwrCA1rvutcDHooMWKe
